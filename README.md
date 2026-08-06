@@ -32,7 +32,7 @@ The analytical pipeline executes in two sequential modules:
    * Calibrates and evaluates MaxEnt models across feature classes and regularization multipliers using `ENMeval`.
    * Projects suitability maps into future climate scenarios (2050 and 2070 under SSP245/SSP585) and builds multi-GCM consensus rasters.
 2. **Module 2 — Functional Diversity & Ecosystem Services (`02_Functional_Diversity.R`):**
-   * Processes species trait matrices (`traits.xlsx`, `functional.xlsx`, and `Eco_data_Mamiferos_Carajas_2019_12.csv`).
+   * Processes species trait matrices (`traits.xlsx`, `functional.xlsx`, and `Eco_data_mammals.csv`).
    * Calculates species-level baseline functional scores (`base_value`) based on diet, IUCN threat status, foraging stratum, and activity cycle.
    * Cross-references functional scores with current and projected habitat areas (in km²) to calculate relative functional loss.
    * Computes community-level functional diversity metrics (Functional Richness — FRic, Functional Dispersion — FDis, and Functional Redundancy) using `FD::dbFD()`.
@@ -51,7 +51,7 @@ The analytical pipeline executes in two sequential modules:
 ### `02_Functional_Diversity.R`
 * **Name:** `02_Functional_Diversity.R`
 * **Objective:** Compute intrinsic functional trait scores, habitat-weighted functional loss, and multidimensional community functional diversity metrics.
-* **Main Inputs:** `data/traits.xlsx`, `data/functional.xlsx`, and `data/Eco_data_Mamiferos_Carajas_2019_12.csv`.
+* **Main Inputs:** `data/traits.xlsx`, `data/functional.xlsx`, and `data/Eco_data_mammals.csv`.
 * **Main Outputs:** Cleaned analytical datasets exported to `outputs/tables/`:
   * `valores_funcionais_multitraco.csv` (Species-level functional values and loss)
   * `diversidade_funcional_multitraco.csv` (Community-level FRic, FDis, and redundancy)
