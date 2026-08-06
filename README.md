@@ -6,7 +6,7 @@
 ## 1. Project Overview
 This repository contains the computational pipeline and raw data to reproduce the study on the impacts of future climate scenarios and habitat loss on functional diversity and associated ecosystem services for mammals in Carajás, Pará State, Brazil.
 
-By integrating Ecological Niche Modeling (Maxent via `ENMwizard`) with trait-based functional diversity metrics, this workflow quantifies how spatial habitat contractions under multiple Global Climate Models (CCSM4, MIROC6, MPI) and Shared Socioeconomic Pathways (SSP245 and SSP585) translate into the degradation of ecosystem services and functional values.
+By integrating Ecological Niche Modeling (MaxEnt via `ENMwizard`) with trait-based functional diversity metrics, this workflow quantifies how spatial habitat contractions under multiple Global Climate Models (CCSM4, MIROC6, MPI) and Shared Socioeconomic Pathways (SSP245 and SSP585) translate into the degradation of ecosystem services and functional values.
 
 ## 2. Repository Structure
 
@@ -15,6 +15,9 @@ By integrating Ecological Niche Modeling (Maxent via `ENMwizard`) with trait-bas
     │   ├── spps_occ_env_thin_f.csv                 # Thinned occurrence coordinates for target species
     │   ├── traits.xlsx                             # Functional traits matrix
     │   └── shp_files.zip                           # Study area spatial boundaries (Shapefiles)
+    ├── outputs/                                    # (Empty folder) Outputs are generated here
+    │   ├── models/                                 # Spatial models (.rds) saved after execution
+    │   └── tables/                                 # Analytical data frames and metrics(.csv) 
     ├── scripts/
     │   ├── 01_SDM_Maxent.R                         # Model calibration, tuning, and consensus projections
     │   └── 02_Functional_Diversity.R               # Trait scoring, functional values, and dbFD metrics
@@ -26,7 +29,7 @@ The analytical pipeline executes in two sequential modules:
 1. **Module 1 — Spatial Modeling (`01_SDM_Maxent.R`):**
    * Reads thinned occurrence coordinates (`spps_occ_env_thin_f.csv`) and spatial boundary shapefiles.
    * Buffers species occurrences and filters collinear environmental predictors (r > 0.75).
-   * Calibrates and evaluates Maxent models across feature classes and regularization multipliers using `ENMeval`.
+   * Calibrates and evaluates MaxEnt models across feature classes and regularization multipliers using `ENMeval`.
    * Projects suitability maps into future climate scenarios (2050 and 2070 under SSP245/SSP585) and builds multi-GCM consensus rasters.
 2. **Module 2 — Functional Diversity & Ecosystem Services (`02_Functional_Diversity.R`):**
    * Processes species trait matrices (`traits.xlsx`, `functional.xlsx`, and `Eco_data_Mamiferos_Carajas_2019_12.csv`).
@@ -41,7 +44,7 @@ The analytical pipeline executes in two sequential modules:
 * **Objective:** Calibrate, evaluate, and project Maxent species distribution models across current and future climate scenarios.
 * **Main Inputs:** `data/spps_occ_env_thin_f.csv`, shapefiles (`shp_files.zip`), baseline WorldClim rasters, and CMIP6 future GCM rasters.
 * **Main Outputs:** Calibrated model lists and consensus projection rasters saved as `.rds` objects (`ENMeval.res.lst.rds`, `mxnt.mdls.preds.cf_cons.rds`, `mods_thrshld_lst.rds`).
-* **Steps Executed:** Occurrence buffer creation (1.5 degrees), correlation cutoff filter (0.75), Maxent parameter tuning, block/jackknife spatial evaluation, and consensus ensemble generation.
+* **Steps Executed:** Occurrence buffer creation (1.5 degrees), correlation cutoff filter (0.75), MaxEnt parameter tuning, block/jackknife spatial evaluation, and consensus ensemble generation.
 * **Quality Control:** Spatial block evaluation for species with n > 15 occurrences; jackknife resampling for species with n <= 15.
 * **Important Notes:** Environmental rasters must be downloaded separately due to file size constraints.
 
@@ -59,8 +62,8 @@ The analytical pipeline executes in two sequential modules:
 ## 5. Analytical Workflow
 The methodological framework links geographical distribution dynamics directly with functional ecology:
 1. **Data Preparation & Cleaning:** Occurrence records are thinned spatially. Trait attributes (body mass, dispersal distance, diet, IUCN threat, foraging stratum, activity pattern) are normalized and cleaned using `janitor`.
-2. **Quality Control & Variable Selection:** Environmental predictors undergo Pearson correlation testing (r < 0.75) to strip redundant bioclimatic variables prior to modeling.
-3. **Distribution Modeling:** Maxent algorithms evaluate species geographic responses. Spatial partitioning dynamically adapts between block validation (n > 15) and jackknife cross-validation (n <= 15). Multi-GCM ensemble consensus maps are built for 2050 and 2070.
+2. **Quality Control & Variable Selection:** Environmental predictors undergo Pearson correlation testing (r < 0.75) to strip redundant bioclimatic variables before modeling.
+3. **Distribution Modeling:** MaxEnt algorithms evaluate species geographic responses. Spatial partitioning dynamically adapts between block validation (n > 15) and jackknife cross-validation (n <= 15). Multi-GCM ensemble consensus maps are built for 2050 and 2070.
 4. **Calculations & Functional Metrics:** Continuous suitability rasters are thresholded into binary presence/absence. Range contractions (in km²) are multiplied by baseline trait scores (`base_value`) to compute relative functional loss per ecosystem service.
 5. **Statistical & Ordination Analyses:** Community-level presence-absence matrices combined with functional trait spaces undergo distance-based Principal Coordinates Analysis (PCoA) via `FD::dbFD()` to derive Functional Richness (FRic), Functional Dispersion (FDis), and Functional Redundancy across regional management units (Pará State vs. Conservation Units).
 
@@ -92,7 +95,7 @@ The computational pipeline generates the following analytical artifacts:
 * **Inspection vs. Final Scripts:** Script `01_SDM_Maxent.R` includes intermediate graphical inspection steps (plotting cropped predictors and thresholded maps) before outputting final RDS objects. Script `02_Functional_Diversity.R` produces the definitive analytical CSV outputs.
 
 ## 10. Reproducibility Notes
-* **Computational Demands:** Maxent tuning (`ENMevaluate_b`) and consensus projections (`consensus_scn_b`) are highly memory-intensive and require multi-core processing (`numCores = 8`).
+* **Computational Demands:** MaxEnt tuning (`ENMevaluate_b`) and consensus projections (`consensus_scn_b`) are highly memory-intensive and require multi-core processing (`numCores = 8`).
 * **Package Deprecations:** The pipeline incorporates legacy spatial libraries (`rgdal`, `rgeos`, `raster`) alongside `terra`. Users on newer R environments should verify system-level JRE and `rgdal` compatibility.
 * **Linearity Assumption:** Functional service loss calculation assumes a proportional relationship between spatial range contraction and functional contribution.
 
@@ -101,4 +104,4 @@ If you use this repository, code, or analytical framework, please cite both the 
 
 > **Ribeiro Da Silva, R., Alves Ferreira, G., Hemming, N., & Marinho-Filho, J. S.** (2025). *Projected range contractions threaten mammal-driven ecosystem functions in a conservation mosaic of southeastern Amazonia*. SSRN Preprint. DOI: [10.2139/ssrn.5432746](https://doi.org/10.2139/ssrn.5432746)
 > 
-> **Ribeiro Da Silva, R., Alves Ferreira, G., Hemming, N., & Marinho-Filho, J. S.** (2025). Repository: Data and computational pipeline for mammal functional diversity in Carajás [Source Code]. GitHub. https://github.com/raquelribeiro/carajas-mammals-functional-loss
+> **Ribeiro Da Silva, R., Alves Ferreira, G., Hemming, N., & Marinho-Filho, J. S.** (2025). Repository: Data and computational pipeline for mammals functional diversity in Carajás [Source Code]. GitHub. https://github.com/raquelribeiro/carajas-mammals-functional-loss
