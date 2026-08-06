@@ -12,15 +12,17 @@ By integrating Ecological Niche Modeling (MaxEnt via `ENMwizard`) with trait-bas
 
     .
     ├── data/
-    │   ├── spps_occ_env_thin_f.csv                 # Thinned occurrence coordinates for target species
-    │   ├── traits.xlsx                             # Functional traits matrix
-    │   └── shp_files.zip                           # Study area spatial boundaries (Shapefiles)
-    ├── outputs/                                    # (Empty folder) Outputs are generated here
-    │   ├── models/                                 # Spatial models (.rds) saved after execution
-    │   └── tables/                                 # Analytical data frames and metrics(.csv) 
+    │   ├── Eco_data_mammals.csv                        # Raw ecological mammal data
+    │   ├── functional.xlsx                             # Base area and functional calculations
+    │   ├── spps_occ_env_thin_f.csv                     # Thinned occurrence coordinates for target species
+    │   ├── traits.xlsx                                 # Functional traits matrix
+    │   └── shp_files.zip                               # Study area spatial boundaries (Shapefiles)
+    ├── outputs/                                        # (Empty folder) Outputs are generated here
+    │   ├── models/                                     # Spatial models (.rds) saved after execution
+    │   └── tables/                                     # Analytical data frames and metrics (.csv)
     ├── scripts/
-    │   ├── 01_SDM_Maxent.R                         # Model calibration, tuning, and consensus projections
-    │   └── 02_Functional_Diversity.R               # Trait scoring, functional values, and dbFD metrics
+    │   ├── 01_SDM_Maxent.R                             # Model calibration, tuning, and consensus projections
+    │   └── 02_Functional_Diversity.R                   # Trait scoring, functional values, and dbFD metrics
     └── README.md
 
 
