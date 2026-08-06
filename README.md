@@ -12,13 +12,9 @@ By integrating Ecological Niche Modeling (Maxent via `ENMwizard`) with trait-bas
 
     .
     ├── data/
-    │   ├── Eco_data_Mamiferos_Carajas_2019_12.csv  # Raw ecological mammal data
     │   ├── spps_occ_env_thin_f.csv                 # Thinned occurrence coordinates for target species
     │   ├── traits.xlsx                             # Functional traits matrix
-    │   ├── functional.xlsx                         # Base area and functional value calculations
     │   └── shp_files.zip                           # Study area spatial boundaries (Shapefiles)
-    ├── outputs/
-    │   └── tables/                                 # Generated analytical data frames and metrics (.csv)
     ├── scripts/
     │   ├── 01_SDM_Maxent.R                         # Model calibration, tuning, and consensus projections
     │   └── 02_Functional_Diversity.R               # Trait scoring, functional values, and dbFD metrics
