@@ -1,4 +1,4 @@
-# Assessing Habitat Loss Impacts on Mammal Functional Diversity and Ecosystem Services in Carajás
+# Projected range contractions threaten mammal-driven ecosystem functions in a conservation mosaic of southeastern Amazonia 
 
 [![R Version](https://img.shields.io/badge/R-%E2%89%A5%204.3.2-blue.svg)](https://cran.r-project.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
