@@ -104,6 +104,6 @@ The computational pipeline generates the following analytical artifacts:
 ## 11. Citation
 If you use this repository, code, or analytical framework, please cite both the scientific manuscript and this source code:
 
-> **Ribeiro Da Silva, R., Alves Ferreira, G., Hemming, N., & Marinho-Filho, J. S.** (2025). *Projected range contractions threaten mammal-driven ecosystem functions in a conservation mosaic of southeastern Amazonia*. SSRN Preprint. DOI: [10.2139/ssrn.5432746](https://doi.org/10.2139/ssrn.5432746)
+> **Ribeiro Da Silva, R., Alves Ferreira, G., Hemming, N., & Marinho-Filho, J. S.** (2027). *Projected range contractions threaten mammal-driven ecosystem functions in a conservation mosaic of southeastern Amazonia*. Journal for Nature Conservation, 96. 127479. DOI: [https://doi.org/10.1016/j.jnc.2026.127479]
 > 
 > **Ribeiro Da Silva, R., Alves Ferreira, G., Hemming, N., & Marinho-Filho, J. S.** (2025). Repository: Data and computational pipeline for mammals functional diversity in Carajás [Source Code]. GitHub. https://github.com/raquelribeiro/carajas-mammals-functional-loss
